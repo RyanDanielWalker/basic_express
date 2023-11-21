@@ -40,17 +40,16 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: req.params.word })
 })
 
-app
-  .route("/name")
-  .get((req, res) => {
-    const { first, last } = req.query
-    res.json({ name: `${first} ${last}` })
-  })
-  .post((req, res) => {
-    const { first, last } = req.body
-    res.json({ name: `${first} ${last}` })
-  })
+app.get("/name", function (req, res) {
+  let fullname = `${req.query.first} ${req.query.last}`
+  res.json({ name: fullname })
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post("/name", function (req, res) {
+  let fullname = `${req.body.first} ${req.body.last}`
+  res.json({ name: fullname })
+})
 
 module.exports = app
