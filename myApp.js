@@ -1,6 +1,7 @@
 let express = require("express")
 let app = express()
 require("dotenv").config()
+let bodyParser = require("body-parser")
 
 app.use(function (req, res, next) {
   let method = req.method
@@ -49,5 +50,7 @@ app
     const { first, last } = req.body
     res.json({ name: `${first} ${last}` })
   })
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 module.exports = app
